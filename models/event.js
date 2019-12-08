@@ -1,6 +1,8 @@
 const mongoose = require("mongoose");
+require("mongoose-double")(mongoose);
 
 const Schema = mongoose.Schema;
+var SchemaTypes = mongoose.Schema.Types;
 
 const eventSchema = new Schema(
   {
@@ -20,7 +22,13 @@ const eventSchema = new Schema(
     icon: String,
     eventAge: String,
     eventPrice: String,
-    eventLink: String
+    eventLink: String,
+    latitude: {
+      type: SchemaTypes.Double
+    },
+    longitude: {
+      type: SchemaTypes.Double
+    }
   },
   {
     timestamps: true
