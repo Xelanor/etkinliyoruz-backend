@@ -1,8 +1,8 @@
 const router = require("express").Router();
-let Event = require("../models/event");
+let Location = require("../models/location");
 
 router.route("/").get((req, res) => {
-  Event.find()
+  Location.find()
     .then(req => res.json(req))
     .catch(err => res.status(400).json("Error: " + err));
 });
@@ -10,25 +10,16 @@ router.route("/").get((req, res) => {
 router.route("/add").post((req, res) => {
   const result = {
     name: req.body.name,
-    description: req.body.description,
-    category: req.body.category,
-    place: req.body.place,
-    date: req.body.date,
-    images: req.body.images,
-    icon: req.body.icon,
-    eventAge: req.body.eventAge,
-    eventPrice: req.body.eventPrice,
-    eventLink: req.body.eventLink,
     latitude: req.body.latitude,
     longitude: req.body.longitude
   };
 
-  const newEvent = new Event(result);
+  const newLocation = new Location(result);
 
-  newEvent
+  newLocation
     .save()
     .then(event => {
-      res.json("Event added!");
+      res.json("Location added!");
     })
     .catch(err => res.status(400).json("Error: " + err));
 });

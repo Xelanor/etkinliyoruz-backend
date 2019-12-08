@@ -8,7 +8,8 @@ const locationSchema = new Schema(
   {
     name: {
       type: String,
-      required: true
+      required: true,
+      unique: true
     },
     latitude: {
       type: SchemaTypes.Double
