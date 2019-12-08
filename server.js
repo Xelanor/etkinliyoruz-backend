@@ -27,8 +27,10 @@ connection.once("open", () => {
 });
 
 const eventsRouter = require("./routes/events");
+const locationsRouter = require("./routes/locations");
 
 app.use("/api", eventsRouter);
+app.use("/api/location", locationsRouter);
 
 app.listen(port, () => {
   console.log(`Server is running on port: ${port}`);
