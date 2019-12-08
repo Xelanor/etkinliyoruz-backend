@@ -17,6 +17,7 @@ const eventSchema = new Schema(
     location: String,
     date: Date,
     images: String,
+    icon: String,
     eventAge: String,
     eventPrice: String,
     eventLink: String

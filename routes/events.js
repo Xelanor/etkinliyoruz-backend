@@ -15,6 +15,7 @@ router.route("/add").post((req, res) => {
     place: req.body.place,
     date: req.body.date,
     images: req.body.images,
+    icon: req.body.icon,
     eventAge: req.body.eventAge,
     eventPrice: req.body.eventPrice,
     eventLink: req.body.eventLink
