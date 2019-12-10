@@ -11,18 +11,15 @@ const eventSchema = new Schema(
       required: true
     },
     description: String,
-    category: {
-      type: [String],
-      required: true
-    },
-    place: String,
-    location: String,
+    category: String,
     date: Date,
-    images: String,
+    image: String,
     icon: String,
     eventAge: String,
     eventPrice: String,
     eventLink: String,
+    location: String,
+    place: String,
     latitude: {
       type: SchemaTypes.Double
     },

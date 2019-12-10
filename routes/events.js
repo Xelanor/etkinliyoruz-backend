@@ -12,13 +12,14 @@ router.route("/add").post((req, res) => {
     name: req.body.name,
     description: req.body.description,
     category: req.body.category,
-    place: req.body.place,
     date: req.body.date,
-    images: req.body.images,
+    image: req.body.image,
     icon: req.body.icon,
     eventAge: req.body.eventAge,
     eventPrice: req.body.eventPrice,
     eventLink: req.body.eventLink,
+    location: req.body.location,
+    place: req.body.place,
     latitude: req.body.latitude,
     longitude: req.body.longitude
   };
