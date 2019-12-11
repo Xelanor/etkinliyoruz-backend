@@ -2,7 +2,9 @@ const router = require("express").Router();
 let Event = require("../models/event");
 
 router.route("/").get((req, res) => {
-  Event.find()
+  Event.find({ date: { $gte: new Date() } })
+    .sort({ date: 1 })
+    .limit(40)
     .then(req => res.json(req))
     .catch(err => res.status(400).json("Error: " + err));
 });
@@ -42,6 +44,17 @@ router.route("/add").post((req, res) => {
         .catch(err => res.status(400).json("Error: " + err));
     }
   });
+});
+
+router.route("/search").post((req, res) => {
+  Event.find({
+    $text: { $search: req.body.searchString },
+    date: { $gte: new Date() }
+  })
+    .sort({ date: 1 })
+    .limit(40)
+    .then(req => res.json(req))
+    .catch(err => res.status(400).json("Error: " + err));
 });
 
 module.exports = router;
