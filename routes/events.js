@@ -8,30 +8,40 @@ router.route("/").get((req, res) => {
 });
 
 router.route("/add").post((req, res) => {
-  const result = {
+  Event.findOne({
     name: req.body.name,
-    description: req.body.description,
     category: req.body.category,
     date: req.body.date,
-    image: req.body.image,
-    icon: req.body.icon,
-    eventAge: req.body.eventAge,
-    eventPrice: req.body.eventPrice,
-    eventLink: req.body.eventLink,
-    location: req.body.location,
-    place: req.body.place,
-    latitude: req.body.latitude,
-    longitude: req.body.longitude
-  };
+    place: req.body.place
+  }).then(event => {
+    if (event) {
+      res.json("Event already exist!");
+    } else {
+      const result = {
+        name: req.body.name,
+        description: req.body.description,
+        category: req.body.category,
+        date: req.body.date,
+        image: req.body.image,
+        icon: req.body.icon,
+        eventAge: req.body.eventAge,
+        eventPrice: req.body.eventPrice,
+        eventLink: req.body.eventLink,
+        location: req.body.location,
+        place: req.body.place,
+        latitude: req.body.latitude,
+        longitude: req.body.longitude
+      };
 
-  const newEvent = new Event(result);
-
-  newEvent
-    .save()
-    .then(event => {
-      res.json("Event added!");
-    })
-    .catch(err => res.status(400).json("Error: " + err));
+      const newEvent = new Event(result);
+      newEvent
+        .save()
+        .then(event => {
+          res.json("Event added!");
+        })
+        .catch(err => res.status(400).json("Error: " + err));
+    }
+  });
 });
 
 module.exports = router;
