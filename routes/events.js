@@ -57,4 +57,10 @@ router.route("/search").post((req, res) => {
     .catch(err => res.status(400).json("Error: " + err));
 });
 
+router.route("/:id").post((req, res) => {
+  Event.findById(req.params.id)
+    .then(req => res.json(req))
+    .catch(err => res.status(400).json("Error: " + err));
+});
+
 module.exports = router;
