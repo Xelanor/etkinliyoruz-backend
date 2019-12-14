@@ -88,7 +88,7 @@ router.route("/events/multiple").get((req, res) => {
       .sort({ date: 1 })
       .limit(5),
     Event.find({
-      category: "Eğlence Merkezi",
+      category: "Müzikal/Gösteri",
       date: { $gte: new Date() }
     })
       .sort({ date: 1 })
