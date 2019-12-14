@@ -46,9 +46,20 @@ router.route("/add").post((req, res) => {
   });
 });
 
-router.route("/search").post((req, res) => {
+router.route("/search/text").post((req, res) => {
   Event.find({
     $text: { $search: req.body.searchString },
+    date: { $gte: new Date() }
+  })
+    .sort({ date: 1 })
+    .limit(40)
+    .then(req => res.json(req))
+    .catch(err => res.status(400).json("Error: " + err));
+});
+
+router.route("/search/category").post((req, res) => {
+  Event.find({
+    category: req.body.searchString,
     date: { $gte: new Date() }
   })
     .sort({ date: 1 })
