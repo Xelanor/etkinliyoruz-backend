@@ -68,6 +68,37 @@ router.route("/search/category").post((req, res) => {
     .catch(err => res.status(400).json("Error: " + err));
 });
 
+router.route("/events/multiple").get((req, res) => {
+  Promise.all([
+    Event.find({
+      date: { $gte: new Date() }
+    })
+      .sort({ date: 1 })
+      .limit(5),
+    Event.find({
+      category: "Atölye",
+      date: { $gte: new Date() }
+    })
+      .sort({ date: 1 })
+      .limit(5),
+    Event.find({
+      category: "Tiyatro",
+      date: { $gte: new Date() }
+    })
+      .sort({ date: 1 })
+      .limit(5),
+    Event.find({
+      category: "Eğlence Merkezi",
+      date: { $gte: new Date() }
+    })
+      .sort({ date: 1 })
+      .limit(5)
+  ])
+
+    .then(req => res.json(req))
+    .catch(err => res.status(400).json("Error: " + err));
+});
+
 router.route("/:id").post((req, res) => {
   Event.findById(req.params.id)
     .then(req => res.json(req))
