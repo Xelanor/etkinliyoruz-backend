@@ -19,4 +19,12 @@ router.route("/add").post((req, res) => {
     .catch(err => res.status(400).json("Error: " + err));
 });
 
+router.route("/global").post((req, res) => {
+  Ticker.find({
+    $and: [{ rsi: { $lte: req.body.rsi }, ninja: { $lte: req.body.ninja } }]
+  })
+    .then(req => res.json(req))
+    .catch(err => res.status(400).json("Error: " + err));
+});
+
 module.exports = router;
