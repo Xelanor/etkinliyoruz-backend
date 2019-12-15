@@ -15,6 +15,9 @@ const tickerSchema = new Schema(
     },
     ninja: {
       type: SchemaTypes.Double
+    },
+    fk: {
+      type: SchemaTypes.Double
     }
   },
   {
