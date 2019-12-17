@@ -18,6 +18,9 @@ const tickerSchema = new Schema(
     },
     fk: {
       type: SchemaTypes.Double
+    },
+    pd_dd: {
+      type: SchemaTypes.Double
     }
   },
   {

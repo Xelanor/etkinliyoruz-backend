@@ -22,7 +22,7 @@ router.route("/add").post((req, res) => {
 router.route("/add-fk").post((req, res) => {
   Ticker.findOneAndUpdate(
     { name: req.body.name },
-    { fk: req.body.fk },
+    { fk: req.body.fk, pd_dd: req.body.pd_dd },
     { upsert: true, new: true, setDefaultsOnInsert: true }
   )
     .then(ticker => {
