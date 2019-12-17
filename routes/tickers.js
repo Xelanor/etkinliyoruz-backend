@@ -33,7 +33,13 @@ router.route("/add-fk").post((req, res) => {
 
 router.route("/global").post((req, res) => {
   Ticker.find({
-    $and: [{ rsi: { $lte: req.body.rsi }, ninja: { $lte: req.body.ninja } }]
+    $and: [
+      {
+        rsi: { $lte: req.body.rsi },
+        ninja: { $lte: req.body.ninja },
+        pd_dd: { $lte: req.body.pd_dd }
+      }
+    ]
   })
     .then(req => res.json(req))
     .catch(err => res.status(400).json("Error: " + err));
