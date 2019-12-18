@@ -3,7 +3,7 @@ let Transaction = require("../models/transaction");
 
 router.route("/").get((req, res) => {
   Transaction.find()
-    .sort({ updated: "desc" })
+    .sort({ updatedAt: "desc" })
     .then(req => res.json(req))
     .catch(err => res.status(400).json("Error: " + err));
 });
