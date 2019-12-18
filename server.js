@@ -29,10 +29,11 @@ connection.once("open", () => {
 const eventsRouter = require("./routes/events");
 const locationsRouter = require("./routes/locations");
 const tickerRouter = require("./routes/tickers");
+const transactionRouter = require("./routes/transactions");
 
 app.use("/api", eventsRouter);
 app.use("/api/location", locationsRouter);
-app.use("/api/ticker", tickerRouter);
+app.use("/api/transaction", transactionRouter);
 
 app.listen(port, () => {
   console.log(`Server is running on port: ${port}`);
