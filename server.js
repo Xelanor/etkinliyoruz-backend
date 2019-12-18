@@ -33,6 +33,7 @@ const transactionRouter = require("./routes/transactions");
 
 app.use("/api", eventsRouter);
 app.use("/api/location", locationsRouter);
+app.use("/api/ticker", tickerRouter);
 app.use("/api/transaction", transactionRouter);
 
 app.listen(port, () => {
