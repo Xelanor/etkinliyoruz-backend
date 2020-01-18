@@ -49,4 +49,10 @@ router.route("/global").post((req, res) => {
     .catch(err => res.status(400).json("Error: " + err));
 });
 
+router.route("/delete").post((req, res) => {
+  Transaction.findByIdAndDelete(req.body.id)
+    .then(req => res.json(req))
+    .catch(err => res.status(400).json("Error: " + err));
+});
+
 module.exports = router;
