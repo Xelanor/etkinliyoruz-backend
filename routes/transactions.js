@@ -55,8 +55,10 @@ router.route("/delete").post((req, res) => {
     .catch(err => res.status(400).json("Error: " + err));
 });
 
-router.route("/set-informed").post((req, res) => {
-  Transaction.findByIdAndUpdate(req.body.id, { $set: { informed: true } })
+router.route("/set-inform-number").post((req, res) => {
+  Transaction.findByIdAndUpdate(req.body.id, {
+    $set: { informCount: req.body.informCount }
+  })
     .then(req => res.json(req))
     .catch(err => res.status(400).json("Error: " + err));
 });

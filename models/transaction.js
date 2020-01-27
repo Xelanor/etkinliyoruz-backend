@@ -19,9 +19,9 @@ const transactionSchema = new Schema(
     type: {
       type: String
     },
-    informed: {
-      type: Boolean,
-      default: false
+    informCount: {
+      type: Number,
+      default: 0
     }
   },
   {
