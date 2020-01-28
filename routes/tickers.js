@@ -7,7 +7,7 @@ router.route("/").get((req, res) => {
     .catch(err => res.status(400).json("Error: " + err));
 });
 
-router.route("/single-ticker").get((req, res) => {
+router.route("/single-ticker").post((req, res) => {
   Ticker.findOne({ name: req.body.name })
     .then(req => res.json(req))
     .catch(err => res.status(400).json("Error: " + err));
