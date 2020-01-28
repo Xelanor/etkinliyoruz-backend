@@ -7,6 +7,12 @@ router.route("/").get((req, res) => {
     .catch(err => res.status(400).json("Error: " + err));
 });
 
+router.route("/single-ticker").get((req, res) => {
+  Ticker.findOne({ name: req.body.name })
+    .then(req => res.json(req))
+    .catch(err => res.status(400).json("Error: " + err));
+});
+
 router.route("/add").post((req, res) => {
   Ticker.findOneAndUpdate(
     { name: req.body.name },
