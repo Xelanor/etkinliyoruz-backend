@@ -2,7 +2,8 @@ const router = require("express").Router();
 let Event = require("../models/event");
 
 router.route("/").get((req, res) => {
-  Event.find({ date: { $gte: new Date() } })
+  // Event.find({ date: { $gte: new Date() } })
+  Event.find()
     .sort({ date: 1 })
     .limit(40)
     .then(req => res.json(req))
@@ -48,8 +49,8 @@ router.route("/add").post((req, res) => {
 
 router.route("/search/text").post((req, res) => {
   Event.find({
-    $text: { $search: req.body.searchString },
-    date: { $gte: new Date() }
+    $text: { $search: req.body.searchString }
+    // date: { $gte: new Date() }
   })
     .sort({ date: 1 })
     .limit(40)
@@ -59,8 +60,8 @@ router.route("/search/text").post((req, res) => {
 
 router.route("/search/category").post((req, res) => {
   Event.find({
-    category: req.body.searchString,
-    date: { $gte: new Date() }
+    category: req.body.searchString
+    // date: { $gte: new Date() }
   })
     .sort({ date: 1 })
     .limit(40)
@@ -71,25 +72,25 @@ router.route("/search/category").post((req, res) => {
 router.route("/events/multiple").get((req, res) => {
   Promise.all([
     Event.find({
-      date: { $gte: new Date() }
+      // date: { $gte: new Date() }
     })
       .sort({ date: 1 })
       .limit(5),
     Event.find({
-      category: "Atölye",
-      date: { $gte: new Date() }
+      category: "Atölye"
+      // date: { $gte: new Date() }
     })
       .sort({ date: 1 })
       .limit(5),
     Event.find({
-      category: "Tiyatro",
-      date: { $gte: new Date() }
+      category: "Tiyatro"
+      // date: { $gte: new Date() }
     })
       .sort({ date: 1 })
       .limit(5),
     Event.find({
-      category: "Müzikal/Gösteri",
-      date: { $gte: new Date() }
+      category: "Müzikal/Gösteri"
+      // date: { $gte: new Date() }
     })
       .sort({ date: 1 })
       .limit(5)
