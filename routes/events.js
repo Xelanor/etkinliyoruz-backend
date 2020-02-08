@@ -1,6 +1,7 @@
 const router = require("express").Router();
 let Event = require("../models/event");
 const all_ticker_details = require("../utils/all_ticker_details");
+const my_ticker_details = require("../utils/my_ticker_details");
 
 router.route("/").get((req, res) => {
   // Event.find({ date: { $gte: new Date() } })
@@ -107,8 +108,12 @@ router.route("/:id").post((req, res) => {
     .catch(err => res.status(400).json("Error: " + err));
 });
 
-router.route("/test").get((req, res) => {
+router.route("/all_ticker_details").get((req, res) => {
   all_ticker_details().then(req => res.json(req));
+});
+
+router.route("/my_ticker_details").get((req, res) => {
+  my_ticker_details().then(req => res.json(req));
 });
 
 module.exports = router;
