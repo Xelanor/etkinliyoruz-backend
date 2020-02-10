@@ -3,7 +3,7 @@ let Change = require("../models/change");
 
 router.route("/").get((req, res) => {
   Change.find()
-    .sort({ createdAt: "desc" })
+    .sort({ updatedAt: "desc" })
     .limit(66)
     .then(req => res.json(req))
     .catch(err => res.status(400).json("Error: " + err));
