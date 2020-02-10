@@ -17,6 +17,9 @@ const changeSchema = new Schema(
     },
     same: {
       type: Number
+    },
+    bist: {
+      type: Number
     }
   },
   {

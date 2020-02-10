@@ -15,7 +15,8 @@ router.route("/add").post((req, res) => {
     {
       increasing: req.body.increasing,
       decreasing: req.body.decreasing,
-      same: req.body.same
+      same: req.body.same,
+      bist: req.body.bist
     },
     { upsert: true, new: true, setDefaultsOnInsert: true }
   )
