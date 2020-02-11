@@ -41,6 +41,7 @@ async function fetch_all_stocks() {
       let stock_dict = {
         stockName: stock_name,
         price: price,
+        shortName: data_dict["shortName"],
         dayRange: data_dict["regularMarketDayRange"],
         rate: rate
       };
