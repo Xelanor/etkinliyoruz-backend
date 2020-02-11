@@ -2,6 +2,7 @@ const router = require("express").Router();
 let Event = require("../models/event");
 const all_ticker_details = require("../utils/all_ticker_details");
 const my_ticker_details = require("../utils/my_ticker_details");
+const single_ticker_details = require("../utils/single_ticker_details");
 
 router.route("/").get((req, res) => {
   // Event.find({ date: { $gte: new Date() } })
@@ -114,6 +115,10 @@ router.route("/all_ticker_details").get((req, res) => {
 
 router.route("/my_ticker_details").get((req, res) => {
   my_ticker_details().then(req => res.json(req));
+});
+
+router.route("/single_ticker_details/:stock").get((req, res) => {
+  single_ticker_details(req.params.stock).then(req => res.json(req));
 });
 
 module.exports = router;
