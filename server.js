@@ -31,12 +31,14 @@ const locationsRouter = require("./routes/locations");
 const tickerRouter = require("./routes/tickers");
 const transactionRouter = require("./routes/transactions");
 const changesRouter = require("./routes/changes");
+const stocksRouter = require("./routes/stocks");
 
 app.use("/api", eventsRouter);
 app.use("/api/location", locationsRouter);
 app.use("/api/ticker", tickerRouter);
 app.use("/api/transaction", transactionRouter);
 app.use("/api/change", changesRouter);
+app.use("/api/stock", stocksRouter);
 
 app.listen(port, () => {
   console.log(`Server is running on port: ${port}`);
