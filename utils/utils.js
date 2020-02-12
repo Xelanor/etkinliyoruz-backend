@@ -1,7 +1,7 @@
 const fetch = require("node-fetch");
 
 async function get_single_stock_target(stockName) {
-  let QUERY_URL = "https://teknodeneyim.com/stocks/single/" + stockName;
+  let QUERY_URL = "http://34.67.211.44/api/stock/single/" + stockName;
 
   let res = await fetch(QUERY_URL);
   res = await res.json();

@@ -9,7 +9,7 @@ function rateCalculator(price, prevClose) {
 }
 
 async function get_my_stocks() {
-  let url = "https://teknodeneyim.com/stocks";
+  let url = "http://34.67.211.44/api/stock";
   let result;
 
   await fetch(url).then(res => (result = res.json()));
