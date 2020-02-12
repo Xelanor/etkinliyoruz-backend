@@ -12,19 +12,19 @@ const stockSchema = new Schema(
     },
     buyTarget: {
       type: SchemaTypes.Double,
-      default: 0
+      default: 0.0
     },
     sellTarget: {
       type: SchemaTypes.Double,
-      default: 0
+      default: 0.0
     },
     prevBuyTarget: {
       type: SchemaTypes.Double,
-      default: 0
+      default: 0.0
     },
     prevSellTarget: {
       type: SchemaTypes.Double,
-      default: 0
+      default: 0.0
     }
   },
   {
