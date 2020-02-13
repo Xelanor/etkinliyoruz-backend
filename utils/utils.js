@@ -62,6 +62,22 @@ async function get_stock_historic_data(stockName, data_scope) {
   return res;
 }
 
+async function get_stock_intraday_data(stockName) {
+  let QUERY_URL = `https://query1.finance.yahoo.com/v7/finance/chart/${stockName}?range=1d&interval=5m&includeTimestamps=false`;
+
+  let res = await fetch(QUERY_URL);
+  res = await res.json();
+  res = await res["chart"]["result"][0]["indicators"]["quote"][0]["close"];
+
+  for (let i = 0; i < res.length; i++) {
+    if (res[i] === null) {
+      res[i] = res[i - 1];
+    }
+  }
+
+  return res;
+}
+
 async function get_non_stock_historic_data(stockName, data_scope) {
   let QUERY_URL = `https://query1.finance.yahoo.com/v7/finance/chart/${stockName}?range=${data_scope +
     30}d&interval=1h&indicators=quote&includeTimestamps=false`;
@@ -217,5 +233,6 @@ module.exports = {
   calculate_env_index,
   calculate_ninja_index,
   calculate_ninja_index_s,
-  calculate_triple_index
+  calculate_triple_index,
+  get_stock_intraday_data
 };

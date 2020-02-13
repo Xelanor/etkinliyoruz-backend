@@ -8,6 +8,7 @@ single_ticker_details = async stockName => {
   let stock_target = await utils.get_single_stock_target(stockName);
   let daily_data = await utils.get_current_tickers_data(stockName);
   let special_data = await utils.get_single_stock_special_data(stockName);
+  let intraday_values = await utils.get_stock_intraday_data(stockName);
   let historic_data;
   let rsi_values;
 
@@ -59,6 +60,7 @@ single_ticker_details = async stockName => {
       "prevBuyTarget" in stock_target ? stock_target["prevBuyTarget"] : 0,
     stateBuy: "stateBuy" in stock_target ? stock_target["stateBuy"] : false,
     stateSell: "stateSell" in stock_target ? stock_target["stateSell"] : false,
+    intraday: intraday_values,
     rsi: rsi_values,
     env: env_values,
     ninja_index: ninja_values,
