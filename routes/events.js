@@ -74,7 +74,7 @@ router.route("/search/category").post((req, res) => {
 
 router.route("/search/town").post((req, res) => {
   Event.find({
-    town: req.body.town,
+    town: req.body.searchString,
     date: { $gte: new Date() }
   })
     .sort({ date: 1 })
