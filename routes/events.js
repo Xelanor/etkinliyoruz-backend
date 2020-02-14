@@ -36,7 +36,9 @@ router.route("/add").post((req, res) => {
         location: req.body.location,
         place: req.body.place,
         latitude: req.body.latitude,
-        longitude: req.body.longitude
+        longitude: req.body.longitude,
+        longitude: req.body.city,
+        longitude: req.body.town
       };
 
       const newEvent = new Event(result);

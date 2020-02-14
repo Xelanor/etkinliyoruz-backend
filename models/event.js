@@ -25,7 +25,9 @@ const eventSchema = new Schema(
     },
     longitude: {
       type: SchemaTypes.Double
-    }
+    },
+    city: String,
+    town: String
   },
   {
     timestamps: true
