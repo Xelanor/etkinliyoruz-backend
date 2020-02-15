@@ -90,31 +90,31 @@ router.route("/events/multiple").get((req, res) => {
       date: { $gte: Date.now() + 10800000 }
     })
       .sort({ date: 1 })
-      .limit(5),
+      .limit(8),
     Event.find({
       category: "Atölye",
       date: { $gte: Date.now() + 10800000 }
     })
       .sort({ date: 1 })
-      .limit(5),
+      .limit(8),
     Event.find({
       category: "Tiyatro",
       date: { $gte: Date.now() + 10800000 }
     })
       .sort({ date: 1 })
-      .limit(5),
+      .limit(8),
     Event.find({
       category: "Eğlence Merkezi",
       date: { $gte: Date.now() + 10800000 }
     })
       .sort({ date: 1 })
-      .limit(5),
+      .limit(8),
     Event.find({
       category: "Müzikal/Gösteri",
       date: { $gte: Date.now() + 10800000 }
     })
       .sort({ date: 1 })
-      .limit(5)
+      .limit(8)
   ])
 
     .then(req => res.json(req))
