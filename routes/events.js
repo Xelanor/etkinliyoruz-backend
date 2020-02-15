@@ -102,6 +102,12 @@ router.route("/events/multiple").get((req, res) => {
       .sort({ date: 1 })
       .limit(5),
     Event.find({
+      category: "Eğlence Merkezi",
+      date: { $gte: new Date() }
+    })
+      .sort({ date: 1 })
+      .limit(5),
+    Event.find({
       category: "Müzikal/Gösteri",
       date: { $gte: new Date() }
     })
@@ -109,6 +115,29 @@ router.route("/events/multiple").get((req, res) => {
       .limit(5)
   ])
 
+    .then(req => res.json(req))
+    .catch(err => res.status(400).json("Error: " + err));
+});
+
+router.route("/events/multiple/count").get((req, res) => {
+  Promise.all([
+    Event.countDocuments({
+      category: "Atölye",
+      date: { $gte: new Date() }
+    }).sort({ date: 1 }),
+    Event.countDocuments({
+      category: "Tiyatro",
+      date: { $gte: new Date() }
+    }).sort({ date: 1 }),
+    Event.countDocuments({
+      category: "Eğlence Merkezi",
+      date: { $gte: new Date() }
+    }).sort({ date: 1 }),
+    Event.countDocuments({
+      category: "Müzikal/Gösteri",
+      date: { $gte: new Date() }
+    }).sort({ date: 1 })
+  ])
     .then(req => res.json(req))
     .catch(err => res.status(400).json("Error: " + err));
 });
