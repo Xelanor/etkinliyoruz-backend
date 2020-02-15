@@ -5,7 +5,7 @@ const my_ticker_details = require("../utils/my_ticker_details");
 const single_ticker_details = require("../utils/single_ticker_details");
 
 router.route("/").get((req, res) => {
-  Event.find({ date: { $gte: new Date() } });
+  Event.find({ date: { $gte: Date.now() + 10800000 } });
   Event.find()
     .sort({ date: 1 })
     // .limit(40)
@@ -55,7 +55,7 @@ router.route("/add").post((req, res) => {
 router.route("/search/text").post((req, res) => {
   Event.find({
     $text: { $search: req.body.searchString },
-    date: { $gte: new Date() }
+    date: { $gte: Date.now() + 10800000 }
   })
     .sort({ date: 1 })
     .then(req => res.json(req))
@@ -65,7 +65,9 @@ router.route("/search/text").post((req, res) => {
 router.route("/search/category").post((req, res) => {
   Event.find({
     category: req.body.searchString,
-    date: { $gte: new Date() }
+    date: {
+      $gte: Date.now() + 10800000
+    }
   })
     .sort({ date: 1 })
     .then(req => res.json(req))
@@ -75,7 +77,7 @@ router.route("/search/category").post((req, res) => {
 router.route("/search/town").post((req, res) => {
   Event.find({
     town: req.body.searchString,
-    date: { $gte: new Date() }
+    date: { $gte: Date.now() + 10800000 }
   })
     .sort({ date: 1 })
     .then(req => res.json(req))
@@ -85,31 +87,31 @@ router.route("/search/town").post((req, res) => {
 router.route("/events/multiple").get((req, res) => {
   Promise.all([
     Event.find({
-      date: { $gte: new Date() }
+      date: { $gte: Date.now() + 10800000 }
     })
       .sort({ date: 1 })
       .limit(5),
     Event.find({
       category: "Atölye",
-      date: { $gte: new Date() }
+      date: { $gte: Date.now() + 10800000 }
     })
       .sort({ date: 1 })
       .limit(5),
     Event.find({
       category: "Tiyatro",
-      date: { $gte: new Date() }
+      date: { $gte: Date.now() + 10800000 }
     })
       .sort({ date: 1 })
       .limit(5),
     Event.find({
       category: "Eğlence Merkezi",
-      date: { $gte: new Date() }
+      date: { $gte: Date.now() + 10800000 }
     })
       .sort({ date: 1 })
       .limit(5),
     Event.find({
       category: "Müzikal/Gösteri",
-      date: { $gte: new Date() }
+      date: { $gte: Date.now() + 10800000 }
     })
       .sort({ date: 1 })
       .limit(5)
@@ -123,19 +125,19 @@ router.route("/events/multiple/count").get((req, res) => {
   Promise.all([
     Event.countDocuments({
       category: "Atölye",
-      date: { $gte: new Date() }
+      date: { $gte: Date.now() + 10800000 }
     }).sort({ date: 1 }),
     Event.countDocuments({
       category: "Tiyatro",
-      date: { $gte: new Date() }
+      date: { $gte: Date.now() + 10800000 }
     }).sort({ date: 1 }),
     Event.countDocuments({
       category: "Eğlence Merkezi",
-      date: { $gte: new Date() }
+      date: { $gte: Date.now() + 10800000 }
     }).sort({ date: 1 }),
     Event.countDocuments({
       category: "Müzikal/Gösteri",
-      date: { $gte: new Date() }
+      date: { $gte: Date.now() + 10800000 }
     }).sort({ date: 1 })
   ])
     .then(req => res.json(req))
