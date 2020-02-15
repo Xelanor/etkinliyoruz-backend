@@ -5,8 +5,7 @@ const my_ticker_details = require("../utils/my_ticker_details");
 const single_ticker_details = require("../utils/single_ticker_details");
 
 router.route("/").get((req, res) => {
-  Event.find({ date: { $gte: Date.now() + 10800000 } });
-  Event.find()
+  Event.find({ date: { $gte: Date.now() + 10800000 } })
     .sort({ date: 1 })
     // .limit(40)
     .then(req => res.json(req))
