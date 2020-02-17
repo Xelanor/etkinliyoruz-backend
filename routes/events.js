@@ -52,10 +52,18 @@ router.route("/add").post((req, res) => {
 });
 
 router.route("/search/text").post((req, res) => {
-  Event.find({
-    $text: { $search: req.body.searchString },
-    date: { $gte: Date.now() + 10800000 }
-  })
+  Event.find()
+    .and([
+      {
+        $or: [
+          { name: { $regex: req.body.searchString, $options: "i" } },
+          { description: { $regex: req.body.searchString, $options: "i" } },
+          { place: { $regex: req.body.searchString, $options: "i" } },
+          { town: { $regex: req.body.searchString, $options: "i" } }
+        ]
+      },
+      { date: { $gte: Date.now() + 10800000 } }
+    ])
     .sort({ date: 1 })
     .then(req => res.json(req))
     .catch(err => res.status(400).json("Error: " + err));
