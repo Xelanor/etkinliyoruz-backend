@@ -83,6 +83,16 @@ router.route("/search/town").post((req, res) => {
     .catch(err => res.status(400).json("Error: " + err));
 });
 
+router.route("/search/place").post((req, res) => {
+  Event.find({
+    place: req.body.place,
+    date: { $gte: Date.now() + 10800000 }
+  })
+    .sort({ date: 1 })
+    .then(req => res.json(req))
+    .catch(err => res.status(400).json("Error: " + err));
+});
+
 router.route("/events/multiple").get((req, res) => {
   Promise.all([
     Event.find({
