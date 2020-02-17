@@ -85,7 +85,7 @@ router.route("/search/town").post((req, res) => {
 
 router.route("/search/place").post((req, res) => {
   Event.find({
-    place: req.body.place,
+    place: req.body.searchString,
     date: { $gte: Date.now() + 10800000 }
   })
     .sort({ date: 1 })
