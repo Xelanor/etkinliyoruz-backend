@@ -66,7 +66,7 @@ single_ticker_details = async stockName => {
     ninja_index: ninja_values,
     ninja_index_s: ninja_values_s,
     triple_index: triple_index_values,
-    closes: historic_data.slice(-1 * data_scope),
+    closes: historic_data,
     news: all_news,
     fk: "fk" in special_data ? special_data["fk"] : 0,
     pd_dd: "pd_dd" in special_data ? special_data["pd_dd"] : 0
