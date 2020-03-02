@@ -27,7 +27,8 @@ const eventSchema = new Schema(
       type: SchemaTypes.Double
     },
     city: String,
-    town: String
+    town: String,
+    active: { type: Boolean, default: true }
   },
   {
     timestamps: true

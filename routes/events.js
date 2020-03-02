@@ -5,12 +5,21 @@ const my_ticker_details = require("../utils/my_ticker_details");
 const single_ticker_details = require("../utils/single_ticker_details");
 
 router.route("/").get((req, res) => {
-  Event.find({ date: { $gte: Date.now() + 10800000 } })
+  Event.find({ active: true, date: { $gte: Date.now() + 10800000 } })
     .sort({ date: 1 })
     // .limit(40)
     .then(req => res.json(req))
     .catch(err => res.status(400).json("Error: " + err));
 });
+
+// router.route("/add-to-all").get((req, res) => {
+//   Event.update({}, { active: true }, { multi: true }, function(
+//     err,
+//     numberAffected
+//   ) {
+//     console.log(numberAffected);
+//   });
+// });
 
 router.route("/add").post((req, res) => {
   Event.findOne({
@@ -62,7 +71,7 @@ router.route("/search/text").post((req, res) => {
           { town: { $regex: req.body.searchString, $options: "i" } }
         ]
       },
-      { date: { $gte: Date.now() + 10800000 } }
+      { active: true, date: { $gte: Date.now() + 10800000 } }
     ])
     .sort({ date: 1 })
     .then(req => res.json(req))
@@ -71,6 +80,7 @@ router.route("/search/text").post((req, res) => {
 
 router.route("/search/category").post((req, res) => {
   Event.find({
+    active: true,
     category: req.body.searchString,
     date: {
       $gte: Date.now() + 10800000
@@ -83,6 +93,7 @@ router.route("/search/category").post((req, res) => {
 
 router.route("/search/town").post((req, res) => {
   Event.find({
+    active: true,
     town: req.body.searchString,
     date: { $gte: Date.now() + 10800000 }
   })
@@ -93,6 +104,7 @@ router.route("/search/town").post((req, res) => {
 
 router.route("/search/place").post((req, res) => {
   Event.find({
+    active: true,
     place: req.body.searchString,
     date: { $gte: Date.now() + 10800000 }
   })
@@ -104,29 +116,34 @@ router.route("/search/place").post((req, res) => {
 router.route("/events/multiple").get((req, res) => {
   Promise.all([
     Event.find({
+      active: true,
       date: { $gte: Date.now() + 10800000 }
     })
       .sort({ date: 1 })
       .limit(8),
     Event.find({
+      active: true,
       category: "Atölye",
       date: { $gte: Date.now() + 10800000 }
     })
       .sort({ date: 1 })
       .limit(8),
     Event.find({
+      active: true,
       category: "Tiyatro",
       date: { $gte: Date.now() + 10800000 }
     })
       .sort({ date: 1 })
       .limit(8),
     Event.find({
+      active: true,
       category: "Eğlence Merkezi",
       date: { $gte: Date.now() + 10800000 }
     })
       .sort({ date: 1 })
       .limit(8),
     Event.find({
+      active: true,
       category: "Müzikal/Gösteri",
       date: { $gte: Date.now() + 10800000 }
     })
@@ -141,18 +158,22 @@ router.route("/events/multiple").get((req, res) => {
 router.route("/events/multiple/count").get((req, res) => {
   Promise.all([
     Event.countDocuments({
+      active: true,
       category: "Atölye",
       date: { $gte: Date.now() + 10800000 }
     }).sort({ date: 1 }),
     Event.countDocuments({
+      active: true,
       category: "Tiyatro",
       date: { $gte: Date.now() + 10800000 }
     }).sort({ date: 1 }),
     Event.countDocuments({
+      active: true,
       category: "Eğlence Merkezi",
       date: { $gte: Date.now() + 10800000 }
     }).sort({ date: 1 }),
     Event.countDocuments({
+      active: true,
       category: "Müzikal/Gösteri",
       date: { $gte: Date.now() + 10800000 }
     }).sort({ date: 1 })
@@ -163,6 +184,12 @@ router.route("/events/multiple/count").get((req, res) => {
 
 router.route("/:id").post((req, res) => {
   Event.findById(req.params.id)
+    .then(req => res.json(req))
+    .catch(err => res.status(400).json("Error: " + err));
+});
+
+router.route("/deactivate").post((req, res) => {
+  Event.findByIdAndUpdate(req.body.id, { active: false })
     .then(req => res.json(req))
     .catch(err => res.status(400).json("Error: " + err));
 });
