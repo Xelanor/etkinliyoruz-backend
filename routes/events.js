@@ -188,10 +188,10 @@ router.route("/:id").post((req, res) => {
     .catch(err => res.status(400).json("Error: " + err));
 });
 
-router.route("/deactivate").post((req, res) => {
-  Event.findByIdAndUpdate(req.body.id, { active: false })
+router.route("/deactivate/:id").post((req, res) => {
+  Event.findByIdAndUpdate(req.params.id, { active: false })
     .then(req => res.json(req))
-    .catch(err => res.status(400).json("Error: " + err));
+    .catch(err => res.status(400).json("sError: " + id));
 });
 
 router.route("/all_ticker_details").get((req, res) => {
